@@ -32,6 +32,11 @@ public class Submit extends Activity implements OnClickListener, OnItemSelectedL
 	private Spinner market, commodity, unit;
 	private Button submit;
 	
+	//string values
+	private String mkt_value;
+	private String cmmdity_value;
+	private String unit_value;
+	
 	// array list for spinner adapter
     private ArrayList<Market> marketList;
     private ArrayList<Commodity> commodityList;
@@ -72,13 +77,46 @@ public class Submit extends Activity implements OnClickListener, OnItemSelectedL
 		price = (EditText) findViewById(R.id.price);
 		
 		market = (Spinner) findViewById(R.id.mkt);
-		market.setOnItemSelectedListener(this);
+		market.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+	        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+	            Object item = parent.getItemIdAtPosition(pos);
+	            mkt_value = item.toString();
+	        }
+
+	        @Override
+	        public void onNothingSelected(AdapterView<?> arg0) {
+	            // TODO Auto-generated method stub
+
+	        }
+	    });
 		
 		commodity = (Spinner) findViewById(R.id.commodity);
-		commodity.setOnItemSelectedListener(this);
+		commodity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+	        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+	            Object item = parent.getItemIdAtPosition(pos);
+	            cmmdity_value = item.toString();
+	        }
+
+	        @Override
+	        public void onNothingSelected(AdapterView<?> arg0) {
+	            // TODO Auto-generated method stub
+
+	        }
+	    });
 		
 		unit = (Spinner) findViewById(R.id.unit);
-		unit.setOnItemSelectedListener(this);
+		unit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+	        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+	            Object item = parent.getItemIdAtPosition(pos);
+	            unit_value = item.toString();
+	        }
+
+	        @Override
+	        public void onNothingSelected(AdapterView<?> arg0) {
+	            // TODO Auto-generated method stub
+
+	        }
+	    });
 		
 		submit = (Button) findViewById(R.id.submit);
 		submit.setOnClickListener(this);
@@ -367,9 +405,9 @@ public class Submit extends Activity implements OnClickListener, OnItemSelectedL
           int success;
           String vendorname = name.getText().toString();
           String cprice = price.getText().toString();
-          String mkt = market.getSelectedItem().toString();
-          String cmdity = commodity.getSelectedItem().toString();
-          String unt = unit.getSelectedItem().toString();
+         String mkt = mkt_value;
+          String cmdity = cmmdity_value;
+          String unt = unit_value;
           
           try {
               // Building Parameters
